@@ -82,3 +82,11 @@ Route::patch('/posts/{post}', function (Post $post) {
     return redirect('/posts' . '/' . $post->id);
 }
 );
+
+
+Route::get('/user_registration', [Controller::class, 'index']);
+Route::post('/user_registration', [Controller::class, 'store']);
+Route::delete('/users/{user}', [Controller::class, 'destroy']);
+Route::get('/users/{user}/edit', [Controller::class, 'edit']);
+Route::put('/users/{user}', [Controller::class, 'update']);
+
