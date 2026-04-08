@@ -3,7 +3,7 @@
         <div class="flex items-center justify-between">
             <div>
                 <h1 class="text-3xl font-bold">User Registration</h1>
-                <p class="mt-2 text-sm text-gray-300">Add, edit, and remove users with database-backed CRUD.</p>
+                <p class="mt-2 text-sm text-gray-300">Add, edit, and remove users.</p>
             </div>
         </div>
 

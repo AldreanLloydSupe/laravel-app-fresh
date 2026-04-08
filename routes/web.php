@@ -4,6 +4,7 @@ use App\Models\Post;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Hash;
 
 Route::view('/', 'welcome', [
     'greeting' => 'Hello, World!',
@@ -98,9 +99,20 @@ Route::post('/user_registration', function (Request $request) {
         'age' => 'nullable|integer|min:0|max:150',
         'address' => 'nullable|string|max:500',
         'contact_number' => 'nullable|string|max:50',
+        'password' => 'nullable|string|min:8',
     ]);
 
-    User::create($data);
+    User::create([
+        'first_name' => $data['first_name'],
+        'last_name' => $data['last_name'],
+        'middle_name' => $data['middle_name'],
+        'nickname' => $data['nickname'],
+        'email' => $data['email'],
+        'age' => $data['age'],
+        'address' => $data['address'],
+        'contact_number' => $data['contact_number'],
+        'password' => isset($data['password']) ? Hash::make($data['password']) : null,
+    ]);
 
     return redirect('/user_registration')->with('success', 'User registered successfully.');
 });
@@ -124,9 +136,25 @@ Route::put('/users/{user}', function (Request $request, User $user) {
         'age' => 'nullable|integer|min:0|max:150',
         'address' => 'nullable|string|max:500',
         'contact_number' => 'nullable|string|max:50',
+        'password' => 'nullable|string|min:8',
     ]);
 
-    $user->update($data);
+    $updateData = [
+        'first_name' => $data['first_name'],
+        'last_name' => $data['last_name'],
+        'middle_name' => $data['middle_name'],
+        'nickname' => $data['nickname'],
+        'email' => $data['email'],
+        'age' => $data['age'],
+        'address' => $data['address'],
+        'contact_number' => $data['contact_number'],
+    ];
+
+    if ($data['password']) {
+        $updateData['password'] = Hash::make($data['password']);
+    }
+
+    $user->update($updateData);
 
     return redirect('/user_registration')->with('success', 'User updated successfully.');
 });
