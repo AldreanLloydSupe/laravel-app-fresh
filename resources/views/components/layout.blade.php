@@ -32,6 +32,7 @@
         <a href="/contact">Contact</a>
         <a href="/formtest">Form Test</a>
         <a href="/posts">Posts</a>
+        <a href="/user_registration">User Registration</a>
     </nav>
 {{ $slot }}
 
